@@ -5,10 +5,10 @@ namespace Assets.Scripts
 {
     public class MouseLook : MonoBehaviour
     {
-        public float Sensitivity = 300f;
+        public float Sensitivity = 100f;
         public Transform PlayerBody;
 
-        private float _xRotation = 0f;
+        private float _xRotation;
 
         // Start is called before the first frame update
         public void Start()

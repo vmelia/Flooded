@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController Controller;
     public float Speed = 12f;
     public float Gravity = -9.81f;
+    public float JumpHeight = 3.0f;
 
     private Vector3 _velocity;
 
@@ -18,10 +19,15 @@ public class PlayerMovement : MonoBehaviour
 
         Controller.Move(move * Speed * Time.deltaTime);
 
+        // Jump?
+        if (Input.GetButtonDown("Jump") && Controller.isGrounded)
+            _velocity.y = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
         _velocity.y += Gravity * Time.deltaTime;
         Controller.Move(_velocity * Time.deltaTime);
 
-        if (Controller.transform.position.y <= 1.08f)
-            _velocity = new Vector3();
+        // Landed - reset velocity.
+        if (Controller.isGrounded)
+            _velocity.y = -2f;
     }
 }
