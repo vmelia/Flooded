@@ -1,26 +1,26 @@
 ﻿using UnityEngine;
 
-public class BarrelDrop : MonoBehaviour
+public class ObjectDrop : MonoBehaviour
 {
     public GameObject Object;
-    public CharacterController Controller;
+    public CharacterController Player;
 
     private const int _range = 4;
 
     public void Update()
     {
         var dropBarrels = Input.GetKey(KeyCode.B);
-        if (!dropBarrels) 
+        if (!dropBarrels)
             return;
 
-        var height = Controller.transform.position.y +20.0f;
+        var height = Player.transform.position.y + 20.0f;
 
         for (var x = -_range; x <= _range; x++)
         {
-            var positionX = Controller.transform.position.x + x;
+            var positionX = Player.transform.position.x + x;
             for (var z = _range; z <= _range; z++)
             {
-                var positionZ = Controller.transform.position.z + z;
+                var positionZ = Player.transform.position.z + z;
                 var position = new Vector3(positionX, height, positionZ);
                 var newObject = Instantiate(Object, position, Quaternion.identity);
                 RandomlyRotate(newObject);
