@@ -5,7 +5,7 @@ public class BarrelDrop : MonoBehaviour
     public GameObject Object;
     public CharacterController Controller;
 
-    private const int _count = 10;
+    private const int _range = 4;
 
     public void Update()
     {
@@ -13,15 +13,15 @@ public class BarrelDrop : MonoBehaviour
         if (!dropBarrels) 
             return;
 
-        var startX = Controller.transform.position.x - _count / 2.0f;
-        var startZ = Controller.transform.position.z - _count / 2.0f;
-        var height = Controller.transform.position.y +100.0f;
+        var height = Controller.transform.position.y +20.0f;
 
-        for (var x = startX; x < startX + _count; x++)
+        for (var x = -_range; x <= _range; x++)
         {
-            for (var z = startZ; z < startZ + _count; z++)
+            var positionX = Controller.transform.position.x + x;
+            for (var z = _range; z <= _range; z++)
             {
-                var position = new Vector3(x, height, z);
+                var positionZ = Controller.transform.position.z + z;
+                var position = new Vector3(positionX, height, positionZ);
                 var newObject = Instantiate(Object, position, Quaternion.identity);
                 RandomlyRotate(newObject);
             }
