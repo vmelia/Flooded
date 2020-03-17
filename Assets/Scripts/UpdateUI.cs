@@ -17,6 +17,7 @@ namespace Assets.Scripts
         private void OnDisable()
         {
             EventBroker.ObjectAdded -= OnObjectAdded;
+            EventBroker.ObjectsCleared -= OnObjectsCleared;
         }
 
         public void Update()
